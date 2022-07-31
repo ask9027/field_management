@@ -54,9 +54,8 @@ class _MainPageState extends State<MainPage> {
           pageIndex = index;
         }),
         currentIndex: pageIndex,
-        selectedItemColor: Colors.amber,
         showUnselectedLabels: false,
-        unselectedItemColor: Colors.amber.shade100,
+        unselectedItemColor: Colors.amber,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
