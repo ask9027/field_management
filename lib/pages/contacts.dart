@@ -18,12 +18,12 @@ class _ContactsPageState extends State<ContactsPage> {
 
   checkFields() {
     setState(() {
-      nameController.text.toString().isNotEmpty
-          ? isEnabled = true
-          : isEnabled = false;
-      ageController.text.toString().isNotEmpty
-          ? isEnabled = true
-          : isEnabled = false;
+      if (nameController.text.toString().isNotEmpty &&
+          ageController.text.toString().isNotEmpty) {
+        isEnabled = true;
+      } else {
+        isEnabled = false;
+      }
     });
   }
 
@@ -49,6 +49,9 @@ class _ContactsPageState extends State<ContactsPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          const SizedBox(
+            height: 20,
+          ),
           TextField(
             controller: nameController,
             maxLength: 30,
@@ -58,8 +61,11 @@ class _ContactsPageState extends State<ContactsPage> {
               border: const OutlineInputBorder(),
               hintText: "Enter Name",
               label: const Text("Name"),
-              errorText: nameController.text.isNotEmpty ? null : "Enter Name",
+              errorText: nameController.text.isNotEmpty ? null : "*Required!",
             ),
+          ),
+          const SizedBox(
+            height: 15,
           ),
           TextField(
             controller: ageController,
@@ -70,8 +76,11 @@ class _ContactsPageState extends State<ContactsPage> {
               border: const OutlineInputBorder(),
               hintText: "Enter Age",
               label: const Text("Age"),
-              errorText: ageController.text.isNotEmpty ? null : "Enter Age",
+              errorText: ageController.text.isNotEmpty ? null : "*Required!",
             ),
+          ),
+          const SizedBox(
+            height: 15,
           ),
           Column(
             children: [
