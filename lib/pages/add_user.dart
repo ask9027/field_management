@@ -17,8 +17,6 @@ class _AddUserPageState extends State<AddUserPage> {
   bool isEnabled = false;
   late Users users;
 
-  final db = UserDatabase.instance;
-
   checkFields() {
     setState(() {
       if (nameController.text.toString().isNotEmpty &&
@@ -28,6 +26,15 @@ class _AddUserPageState extends State<AddUserPage> {
         isEnabled = false;
       }
     });
+  }
+
+  Future<Users> addUser() async {
+    final users = Users(
+      name: nameController.text,
+      age: int.parse(ageController.text),
+      createTime: DateTime.now(),
+    );
+    return await UserDatabase.instance.addUser(users);
   }
 
   @override
@@ -95,12 +102,7 @@ class _AddUserPageState extends State<AddUserPage> {
                 TextButton(
                   onPressed: isEnabled
                       ? () => {
-                            users = Users(
-                              name: nameController.text,
-                              age: int.parse(ageController.text),
-                              createTime: DateTime.now(),
-                            ),
-                            users = db.addUser(users) as Users,
+                            users = addUser() as Users,
                             ScaffoldMessenger.maybeOf(context)?.showSnackBar(
                               SnackBar(
                                 content: Text(
