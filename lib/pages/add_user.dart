@@ -39,87 +39,89 @@ class _AddUserPageState extends State<AddUserPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Add New User",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.green.shade800,
-              fontWeight: FontWeight.bold,
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Add New User",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.green.shade800,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          TextField(
-            controller: nameController,
-            maxLength: 30,
-            maxLines: 1,
-            onChanged: (value) => checkFields(),
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: "Enter Name",
-              label: const Text("Name"),
-              errorText: nameController.text.isNotEmpty ? null : "*Required!",
+            const SizedBox(
+              height: 30,
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TextField(
-            controller: ageController,
-            maxLength: 3,
-            maxLines: 1,
-            onChanged: (value) => checkFields(),
-            textInputAction: TextInputAction.done,
-            keyboardType: TextInputType.number,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              hintText: "Enter Age",
-              label: const Text("Age"),
-              errorText: ageController.text.isNotEmpty ? null : "*Required!",
+            TextField(
+              controller: nameController,
+              maxLength: 30,
+              maxLines: 1,
+              onChanged: (value) => checkFields(),
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                hintText: "Enter Name",
+                label: const Text("Name"),
+                errorText: nameController.text.isNotEmpty ? null : "*Required!",
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Column(
-            children: [
-              TextButton(
-                onPressed: isEnabled
-                    ? () => {
-                          users = Users(
-                            name: nameController.text,
-                            age: int.parse(ageController.text),
-                            createTime: DateTime.now(),
-                          ),
-                          users = db.addUser(users) as Users,
-                          ScaffoldMessenger.maybeOf(context)?.showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                "User Id: ${users.id} \nUser Name: ${users.name} \nUser Age: ${users.age} \nAdded Time: ${users.createTime.toIso8601String()}",
-                              ),
-                              duration: const Duration(
-                                seconds: 3,
+            const SizedBox(
+              height: 20,
+            ),
+            TextField(
+              controller: ageController,
+              maxLength: 3,
+              maxLines: 1,
+              onChanged: (value) => checkFields(),
+              textInputAction: TextInputAction.done,
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                hintText: "Enter Age",
+                label: const Text("Age"),
+                errorText: ageController.text.isNotEmpty ? null : "*Required!",
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: [
+                TextButton(
+                  onPressed: isEnabled
+                      ? () => {
+                            users = Users(
+                              name: nameController.text,
+                              age: int.parse(ageController.text),
+                              createTime: DateTime.now(),
+                            ),
+                            users = db.addUser(users) as Users,
+                            ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "User Id: ${users.id} \nUser Name: ${users.name} \nUser Age: ${users.age} \nAdded Time: ${users.createTime.toIso8601String()}",
+                                ),
+                                duration: const Duration(
+                                  seconds: 3,
+                                ),
                               ),
                             ),
-                          ),
-                          Navigator.pop(context),
-                        }
-                    : null,
-                child: const Text(
-                  "Add User",
+                            Navigator.pop(context),
+                          }
+                      : null,
+                  child: const Text(
+                    "Add User",
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
