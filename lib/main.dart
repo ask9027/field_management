@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'pages/contacts.dart';
 import 'pages/home.dart';
 import 'pages/search.dart';
@@ -55,6 +54,7 @@ class _MainPageState extends State<MainPage> {
         }),
         currentIndex: pageIndex,
         showUnselectedLabels: false,
+        selectedItemColor: Colors.amber.shade900,
         unselectedItemColor: Colors.amber,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
