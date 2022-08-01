@@ -1,3 +1,4 @@
+import 'package:field_management/pages/add_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -63,7 +64,10 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () => setState(() {
-          listLength++;
+          // listLength++;
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const AddUserPage(),
+          ));
         }),
       ),
     );
